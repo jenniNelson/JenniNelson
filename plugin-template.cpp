@@ -69,9 +69,9 @@ void PluginTemplate::execute(void)
   elapsedTime = elapsedTime % cycleTime;
 
   if( (elapsedTime) >= dutyTimeWithinCycle){
-    output(0) = 0; // Turn current off
+    output(0) = 0; // Turn current off (0V)
   }else{
-    output(0) = 1; // Turn current on
+    output(0) = 5; // Turn current on (5V)
   }
   elapsedTime += period
   return;

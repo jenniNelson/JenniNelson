@@ -51,7 +51,7 @@ private:
 private slots:
   // these are custom functions that can also be connected to events
   // through the Qt API. they must be implemented in plugin_template.cpp
-
-  void aBttn_event(void);
-  void bBttn_event(void);
+  //
+  // void aBttn_event(void);
+  // void bBttn_event(void);
 };
