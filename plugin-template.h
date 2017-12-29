@@ -40,9 +40,11 @@ protected:
   virtual void update(DefaultGUIModel::update_flags_t);
 
 private:
-  double some_parameter;
-  double some_state;
-  double period;
+  double dutyTimeWithinCycle; //ms
+  double cycleTime; //ms
+  double dutyCyclePercentage; // 0.5 = 50%
+  double period; //ms
+  double elapsedTime; //ms
 
   void initParameters();
 
