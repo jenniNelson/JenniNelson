@@ -66,14 +66,14 @@ LaserController::~LaserController(void){}
 void LaserController::execute(void)
 {
   // Where are we within a cycle? (elapsedTime modulos back to where we are in a cycle)
-  elapsedTime = elapsedTime % cycleTime;
+  elapsedTime = std::fmod(elapsedTime, cycleTime);
 
   if( (elapsedTime) >= dutyTimeWithinCycle){
     output(0) = 0; // Turn current off (0V)
   }else{
     output(0) = 5; // Turn current on (5V)
   }
-  elapsedTime += period
+  elapsedTime += period;
   return;
 }
 
@@ -132,7 +132,7 @@ void LaserController::update(DefaultGUIModel::update_flags_t flag)
 }
 
 /// Keep dutyCyclePercentage within 0% to 100%
-private void tetherDutyCycle(){
+private void LaserController::tetherDutyCycle(){
   if(dutyCyclePercentage >1){
     dutyCyclePercentage = 1;
   } if (dutyCyclePercentage < 0){
@@ -142,7 +142,7 @@ private void tetherDutyCycle(){
 
 /// Keep the 'frequency' between .3 -> 3000 Hz, by keeping the cycle time (ms) within those bounds.
 /// This should be done before computing the dutyTimeWithinCycle.
-private void tetherFrequency(){
+private void LaserController::tetherFrequency(){
   // Frequency is within .3 -> 3000 Hz, so cycle is between 1000/.3 -> 1000/3000
   if(cycleTime >= (1000/.3)){
     cycleTime = 1000/.3;
