@@ -1,9 +1,9 @@
-PLUGIN_NAME = plugin_template
+PLUGIN_NAME = LaserController
 
-HEADERS = plugin-template.h
+HEADERS = LaserController.h
 
-SOURCES = plugin-template.cpp\
-          moc_plugin-template.cpp\
+SOURCES = LaserController.cpp\
+          moc_LaserController.cpp\
 
 LIBS = 
 
