@@ -6,9 +6,11 @@
 ![Plugin Template GUI](plugin-template.png)
 
 <!--start-->
-This module outputs a TTL pulse signal, based off the parameters below. More documentation pending.
+This is the plugin template, also known in previous versions as MyPluginGUI. It is designed to provide a simplified interface with which anyone fork into custom RTXI modules. For instructions and tutorials regarding its use, see [the documentation on our website](http://rtxi.org/docs/tutorials/2015/04/15/understanding-plugin-template/). 
 <!--end-->
 
 ####Paramaters
-1. Frequency (Hz) - The frequency, ranging from .3 to 3000 Hz. Any values out of these bounds will adjust to the max or min.
-1. Duty Cycle (%) - The percentage of a cycle that the signal is on, ranging from 0% 100%. Any values out of these bounds will adjust to the max or min.
+1. GUI Label - Example parameter
+
+####States
+1. A State - An example state
