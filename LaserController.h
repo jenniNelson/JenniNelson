@@ -47,6 +47,8 @@ private:
   double elapsedTime; //ms
 
   void initParameters();
+  void tetherDutyCycle();
+  void tetherFrequency();
 
 private slots:
   // these are custom functions that can also be connected to events
