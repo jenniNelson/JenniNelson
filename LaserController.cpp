@@ -34,11 +34,11 @@ createRTXIPlugin(void)
 /// The GUI labels for the needed inputs: frequency and dutyCyclePercentage.
 static DefaultGUIModel::variable_t vars[] = {
   {
-    "Frequency (Hz)", "From .3Hz to 3000 Hz. Out of bounds will adjust to max or min.",
+    "Frequency (Hz)", "From .3Hz to 3000 Hz. Input out of bounds will adjust to max or min.",
     DefaultGUIModel::PARAMETER | DefaultGUIModel::DOUBLE,
   },
   {
-    "Duty Cycle (%)", "0 to 100. Out of bounds will adjust to max or min.", DefaultGUIModel::PARAMETER | DefaultGUIModel::DOUBLE,
+    "Duty Cycle (%)", "0 to 100. Input out of bounds will adjust to max or min.", DefaultGUIModel::PARAMETER | DefaultGUIModel::DOUBLE,
   },
 };
 
@@ -69,9 +69,9 @@ void LaserController::execute(void)
   elapsedTime = std::fmod(elapsedTime, cycleTime);
 
   if( (elapsedTime) >= dutyTimeWithinCycle){
-    output(0) = 0; // Turn current off (0V)
+    output(0) = false; // Turn current off (0V)
   }else{
-    output(0) = 5; // Turn current on (5V)
+    output(0) = true; // Turn current on (5V)
   }
   elapsedTime += period;
   return;
@@ -132,7 +132,7 @@ void LaserController::update(DefaultGUIModel::update_flags_t flag)
 }
 
 /// Keep dutyCyclePercentage within 0% to 100%
-private void LaserController::tetherDutyCycle(){
+void LaserController::tetherDutyCycle(){
   if(dutyCyclePercentage >1){
     dutyCyclePercentage = 1;
   } if (dutyCyclePercentage < 0){
@@ -142,7 +142,7 @@ private void LaserController::tetherDutyCycle(){
 
 /// Keep the 'frequency' between .3 -> 3000 Hz, by keeping the cycle time (ms) within those bounds.
 /// This should be done before computing the dutyTimeWithinCycle.
-private void LaserController::tetherFrequency(){
+void LaserController::tetherFrequency(){
   // Frequency is within .3 -> 3000 Hz, so cycle is between 1000/.3 -> 1000/3000
   if(cycleTime >= (1000/.3)){
     cycleTime = 1000/.3;
