@@ -45,6 +45,7 @@ private:
   double dutyCyclePercentage; // 0.5 = 50%
   double period; //ms
   double elapsedTime; //ms
+  double out_state; 
 
   void initParameters();
   void tetherDutyCycle();

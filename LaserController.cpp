@@ -40,6 +40,13 @@ static DefaultGUIModel::variable_t vars[] = {
   {
     "Duty Cycle (%)", "0 to 100. Input out of bounds will adjust to max or min.", DefaultGUIModel::PARAMETER | DefaultGUIModel::DOUBLE,
   },
+  {
+    "Output", "out", DefaultGUIModel::OUTPUT | DefaultGUIModel::DOUBLE,
+  },
+  {
+    "OutputState", "outState", DefaultGUIModel::STATE | DefaultGUIModel::DOUBLE,
+  },
+
 };
 
 static size_t num_vars = sizeof(vars) / sizeof(DefaultGUIModel::variable_t);
@@ -69,8 +76,10 @@ void LaserController::execute(void)
   elapsedTime = std::fmod(elapsedTime, cycleTime);
 
   if( (elapsedTime) >= dutyTimeWithinCycle){
+    out_state = 0;
     output(0) = false; // Turn current off (0V)
   }else{
+    out_state = 5;
     output(0) = true; // Turn current on (5V)
   }
   elapsedTime += period;
@@ -94,6 +103,7 @@ void LaserController::update(DefaultGUIModel::update_flags_t flag)
 
       setParameter("Frequency (Hz)", cycleTime);
       setParameter("Duty Cycle (%)", dutyCyclePercentage);
+      setState("Output", out_state);
 
       //Adjust to proper units
       cycleTime = 1000/cycleTime; // ms/frequency
